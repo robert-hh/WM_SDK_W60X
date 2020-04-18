@@ -55,8 +55,8 @@ void Debug_UartInit(void)
 	apbclk = sysclk.apbclk * 1000000;
 
 /* baud rate register value = apb_clk/(16*115200) */
-/* Èç¹ûAPBÊ±ÖÓÊÇ40MHz£¬ */
-/* ²¨ÌØÂÊ¼Ä´æÆ÷µÄÖµÉèÖÃÎª 115200 : 21 */
+/* ï¿½ï¿½ï¿½APBÊ±ï¿½ï¿½ï¿½ï¿½40MHzï¿½ï¿½ */
+/* ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼Ä´ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½Îª 115200 : 21 */
 /* 9600bps : 260 */
 	bd = (apbclk / (16 * 115200) -
 		  1) | (((apbclk % (115200 * 16)) * 16 / (115200 * 16)) << 16);
@@ -94,8 +94,8 @@ void UartRegInit(int uart_no)
 	apbclk = sysclk.apbclk * 1000000;
 
 /* baud rate register value = apb_clk/(16*115200) */
-/* Èç¹ûAPBÊ±ÖÓÊÇ40MHz£¬ */
-/* ²¨ÌØÂÊ¼Ä´æÆ÷µÄÖµÉèÖÃÎª 115200 : 21 */
+/* ï¿½ï¿½ï¿½APBÊ±ï¿½ï¿½ï¿½ï¿½40MHzï¿½ï¿½ */
+/* ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼Ä´ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½Îª 115200 : 21 */
 /* 9600bps : 260 */
     if (TLS_UART_0 == uart_no)
     {
@@ -273,7 +273,7 @@ TLS_UART_STATUS_T tls_uart_set_flow_ctrl(struct tls_uart_port * port,
         return TLS_UART_STATUS_ERROR;
 
 // port->opts.flow_ctrl = flow_ctrl;
-// //²»ÄÜÔÚÕâÀïÐÞ¸Ä£¬ÎªÁËÅäºÏÍ¸´«ºÍATÖ¸Áî£¬Èí¼þ»á×Ô¼ºÐÞ¸ÄflowctrlÅäÖÃ£¬µ«ÊÇ²ÎÊý»¹ÊÇ¹Ì¶¨²»±äµÄ
+// //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Þ¸Ä£ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ï¿½ï¿½ï¿½ATÖ¸ï¿½î£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½Þ¸ï¿½flowctrlï¿½ï¿½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½Ç²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¹Ì¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //printf("\nport %d flow ctrl==%d\n",port->uart_no,flow_ctrl);
     switch (flow_ctrl)
     {
@@ -313,7 +313,7 @@ void tls_uart_set_fc_status(int uart_no, TLS_UART_FLOW_CTRL_MODE_T status)
     port->fcStatus = status;
     //printf("\nset fc status=%d\n",status);
     tls_uart_set_flow_ctrl(port, status);
-    if (TLS_UART_FLOW_CTRL_HARDWARE == port->opts.flow_ctrl && 0 == status && port->hw_stopped) // ×¼±¸¹Ø±ÕÁ÷¿ØÊ±£¬·¢ÏÖtxÒÑ¾­Í£Ö¹£¬ÐèÒªÔÙ´ò¿ªtx
+    if (TLS_UART_FLOW_CTRL_HARDWARE == port->opts.flow_ctrl && 0 == status && port->hw_stopped) // ×¼ï¿½ï¿½ï¿½Ø±ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½txï¿½Ñ¾ï¿½Í£Ö¹ï¿½ï¿½ï¿½ï¿½Òªï¿½Ù´ï¿½tx
     {
         tls_uart_tx_enable(port);
         tls_uart_tx_chars(port);
@@ -373,7 +373,7 @@ int tls_uart_config(struct tls_uart_port *port, struct tls_uart_options *opts)
     tls_uart_set_flow_ctrl(port, opts->flow_ctrl);
 
 /* config uart interrupt register */
-/*    if (port->uart_mode == TLS_UART_MODE_INT) */// Ä¬ÈÏÊ¹ÓÃÖÐ¶ÏµÄ·½Ê½
+/*    if (port->uart_mode == TLS_UART_MODE_INT) */// Ä¬ï¿½ï¿½Ê¹ï¿½ï¿½ï¿½Ð¶ÏµÄ·ï¿½Ê½
     {
     /* clear interrupt */
         port->regs->UR_INTS = 0xFFFFFFFF;
@@ -557,7 +557,7 @@ void tls_uart_tx_chars_start(struct tls_uart_port *port)
         tx_msg = dl_list_first(pending_list, tls_uart_tx_msg_t, list);
         while (tx_count-- > 0 && tx_msg->offset < tx_msg->buflen)
         {
-        /* ¼ì²étx fifoÊÇ·ñÒÑÂú */
+        /* ï¿½ï¿½ï¿½tx fifoï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ */
             if ((port->regs->UR_FIFOS & UFS_TX_FIFO_CNT_MASK) ==
                 port->tx_fifofull)
             {
@@ -622,7 +622,7 @@ static void tls_uart_tx_chars(struct tls_uart_port *port)
         tx_msg = dl_list_first(pending_list, tls_uart_tx_msg_t, list);
         while (tx_count-- > 0 && tx_msg->offset < tx_msg->buflen)
         {
-        /* ¼ì²étx fifoÊÇ·ñÒÑÂú */
+        /* ï¿½ï¿½ï¿½tx fifoï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ */
             if ((port->regs->UR_FIFOS & UFS_TX_FIFO_CNT_MASK) ==
                 port->tx_fifofull)
             {
@@ -699,7 +699,7 @@ void tls_set_uart_rx_status(int uart_no, int status)
                 && (TLS_UART_FLOW_CTRL_HARDWARE == port->fcStatus))
             {
                 cpu_sr = tls_os_set_critical();
-                // ¹Ørxfifo trigger level interruptºÍoverrun error
+                // ï¿½ï¿½rxfifo trigger level interruptï¿½ï¿½overrun error
                 port->regs->UR_INTM |= ((0x1 << 2) | (0x01 << 8));
                 port->rxstatus = TLS_UART_RX_DISABLE;
                 tls_os_release_critical(cpu_sr);
@@ -754,7 +754,7 @@ void UART0_IRQHandler(void)
                 if (TLS_UART_FLOW_CTRL_HARDWARE == port->fcStatus)
                 {
                     tls_set_uart_rx_status(port->uart_no, TLS_UART_RX_DISABLE);
-                    rx_fifocnt = 0; // Èç¹ûÓÐÓ²¼þÁ÷¿Ø£¬¹Ø±Õ½ÓÊÕ£¬°Ñ×îºóÒ»¸ö×Ö·û·Å½ø»·ÐÎbufferÖÐ
+                    rx_fifocnt = 0; // ï¿½ï¿½ï¿½ï¿½ï¿½Ó²ï¿½ï¿½ï¿½ï¿½ï¿½Ø£ï¿½ï¿½Ø±Õ½ï¿½ï¿½Õ£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ö·ï¿½ï¿½Å½ï¿½ï¿½ï¿½ï¿½ï¿½bufferï¿½ï¿½
                 }
                 else
                     break;
@@ -918,7 +918,7 @@ void UART2_IRQHandler(void)
                 if (TLS_UART_FLOW_CTRL_HARDWARE == port->fcStatus)
                 {
                     tls_set_uart_rx_status(port->uart_no, TLS_UART_RX_DISABLE);
-                    rx_fifocnt = 0; // Èç¹ûÓÐÓ²¼þÁ÷¿Ø£¬¹Ø±Õ½ÓÊÕ£¬°Ñ×îºóÒ»¸ö×Ö·û·Å½ø»·ÐÎbufferÖÐ
+                    rx_fifocnt = 0; // ï¿½ï¿½ï¿½ï¿½ï¿½Ó²ï¿½ï¿½ï¿½ï¿½ï¿½Ø£ï¿½ï¿½Ø±Õ½ï¿½ï¿½Õ£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ö·ï¿½ï¿½Å½ï¿½ï¿½ï¿½ï¿½ï¿½bufferï¿½ï¿½
                 }
                 else
                     break;
@@ -1119,7 +1119,7 @@ int tls_uart_read(u16 uart_no, u8 * buf, u16 readsize)
     {
         buflen = readsize;
     }
-    else                        // Èç¹ûÊý¾Ý²»¹»£¬Ö±½Ó·µ»Ø0
+    else                        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý²ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½Ó·ï¿½ï¿½ï¿½0
     {
         buflen = data_cnt;
     }
@@ -1137,6 +1137,34 @@ int tls_uart_read(u16 uart_no, u8 * buf, u16 readsize)
     return buflen;
 }
 
+
+/**
+ * @brief          This function returns the number of characters available for reading.
+ *
+ * @param[in]      uart_no    is the uart numer
+ *
+ * @retval         data size
+ *
+ * @note           None
+ */
+int tls_uart_read_avail(u16 uart_no)
+{
+    int data_cnt;
+    struct tls_uart_port *port = NULL;
+    struct tls_uart_circ_buf *recv;
+
+    if (TLS_UART_0 == uart_no)
+        port = &uart_port[0];
+    else if (TLS_UART_1 == uart_no)
+        port = &uart_port[1];
+	else if (TLS_UART_2 == uart_no)
+		port = &uart_port[2];
+
+    recv = &port->recv;
+    data_cnt = CIRC_CNT(recv->head, recv->tail, TLS_UART_RX_BUF_SIZE);
+
+    return data_cnt;
+}
 
 u8 *testbuf;
 u16 flag = 0;
@@ -1275,7 +1303,7 @@ static s16 tls_uart_tx_cb(struct tls_uart_port *port)
 
     if (NULL == port)
         return WM_FAILED;
-    if (port->buf_len > 0)      // uart1,»º³åÇøÊý¾Ý´«ÊäÍê³ÉÖ®ºó£¬Ê£ÓàµÄ´ý´«µÄÊý¾ÝÔÙ·ÅÈë»º³åÇø
+    if (port->buf_len > 0)      // uart1,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö®ï¿½ï¿½Ê£ï¿½ï¿½Ä´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù·ï¿½ï¿½ë»ºï¿½ï¿½ï¿½ï¿½
     {
         ret_len = tls_uart_fill_buf(port, port->buf_ptr, port->buf_len);
     // TLS_DBGPRT_INFO("\ntx cb write len=%d",ret_len);

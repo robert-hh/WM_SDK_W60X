@@ -371,6 +371,17 @@ int tls_uart_read(u16 uart_no, u8 * buf, u16 readsize);
 
 
 /**
+ * @brief          This function returns the number of characters available for reading.
+ *
+ * @param[in]      uart_no    is the uart numer
+ *
+ * @retval         data size
+ *
+ * @note           None
+ */
+int tls_uart_read_avail(u16 uart_no);
+
+/**
  * @brief          This function is used to transfer data synchronously.
  *
  * @param[in]      uart_no      is the uart number
