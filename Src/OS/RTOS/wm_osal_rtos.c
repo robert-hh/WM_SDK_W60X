@@ -98,7 +98,7 @@ tls_os_status_t tls_os_task_create(tls_os_task_t *task,
 		(portSTACK_TYPE *)stk_start,
 		stk_size/sizeof(u32),
 		param,
-		configMAX_PRIORITIES - prio,	/*ÓÅÏÈ¼¶µßµ¹Ò»ÏÂ£¬ÓëucosÓÅÏÈ¼¶Ë³ÐòÏà·´*/
+		configMAX_PRIORITIES - prio,	/*ï¿½ï¿½ï¿½È¼ï¿½ï¿½ßµï¿½Ò»ï¿½Â£ï¿½ï¿½ï¿½ucosï¿½ï¿½ï¿½È¼ï¿½Ë³ï¿½ï¿½ï¿½à·´*/
 		task	);
 	//printf("configMAX_PRIORITIES - prio:%d\n", configMAX_PRIORITIES - prio);
     if (error == pdTRUE)
@@ -282,7 +282,7 @@ tls_os_status_t tls_os_task_del(u8 prio,void (*freefun)(void))
 *              2) You MUST NOT change the priority of the task that owns the mutex
 *********************************************************************************************************
 */
-//²»¿ÉÔÚÖÐ¶ÏÖÐµ÷ÓÃ
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½Ðµï¿½ï¿½ï¿½
  tls_os_status_t tls_os_mutex_acquire(tls_os_mutex_t *mutex,
         u32 wait_time)
 {
@@ -421,7 +421,7 @@ tls_os_status_t tls_os_task_del(u8 prio,void (*freefun)(void))
 *			TLS_OS_ERROR
 *********************************************************************************************************
 */
-//¸Ãº¯Êý²»¿ÉÓÃÓÚÖÐ¶Ï·þÎñ³ÌÐòÖÐ
+//ï¿½Ãºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
  tls_os_status_t tls_os_sem_acquire(tls_os_sem_t *sem,
         u32 wait_time)
 {
@@ -556,7 +556,7 @@ extern u32 __heap_base;
  tls_os_status_t tls_os_queue_delete(tls_os_queue_t *queue)
 {
 
-	if ((u32 *)(((xQUEUE *)queue)->pcHead) >= &__heap_base)		//Èç¹ûÃ»ÓÐ´Ó¶ÑÉêÇë£¬²»ÓÃÊÍ·Å)
+	if ((u32 *)(((xQUEUE *)queue)->pcHead) >= &__heap_base)		//ï¿½ï¿½ï¿½Ã»ï¿½Ð´Ó¶ï¿½ï¿½ï¿½ï¿½ë£¬ï¿½ï¿½ï¿½ï¿½ï¿½Í·ï¿½)
 	{
 		tls_mem_free(((xQUEUE *)queue)->pcHead);
 	}

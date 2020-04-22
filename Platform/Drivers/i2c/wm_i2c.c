@@ -94,7 +94,7 @@ int tls_i2c_wait_ack(void)
 		errtime ++;
 		if(errtime > 512)
 		{
-			printf("wait ack err\n");
+			// printf("wait ack err\n");
 			tls_i2c_stop();
 			return WM_FAILED;
 		}

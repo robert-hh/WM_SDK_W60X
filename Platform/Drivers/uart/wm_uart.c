@@ -38,7 +38,7 @@ const u32 baud_rates[] = {
     1000000, 921600, 460800,
     230400, 115200, 57600, 38400,
     19200, 9600, 4800, 2400,
-    1800, 1200, 600
+    1800, 1200, 600, 300
 };
 
 static void tls_uart_tx_enable(struct tls_uart_port *port);
