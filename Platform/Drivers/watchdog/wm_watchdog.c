@@ -14,7 +14,7 @@
 #include "wm_watchdog.h"
 
 static u32 wdg_jumpclear_flag = 0; /*0:donot jump clear, 1: jump clear, 2:close wdg*/
-void WDG_IRQHandler(void)
+void _WDG_IRQHandler(void)
 {
 	printf("WDG IRQ\n");
 }
