@@ -23,6 +23,7 @@
 
 
 /** baud rate definition */
+#define UART_BAUDRATE_B300          300
 #define UART_BAUDRATE_B600          600
 #define UART_BAUDRATE_B1200	        1200
 #define UART_BAUDRATE_B1800         1800

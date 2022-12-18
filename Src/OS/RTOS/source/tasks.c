@@ -2284,10 +2284,10 @@ tskTCB *pxNewTCB;
 			#else
 			{
 				usStackRemaining = usTaskCheckFreeStackSpace( ( unsigned char * ) pxNextTCB->pxStack );
-				usStackRemaining*=4;	//转成byte
+				usStackRemaining*=4;	//转锟斤拷byte
 				if(pxNextTCB->pxTopOfStack >= pxNextTCB->pxStack)
 				{
-					usCurStack = (pxNextTCB->pxTopOfStack - pxNextTCB->pxStack)*4;	//转成byte
+					usCurStack = (pxNextTCB->pxTopOfStack - pxNextTCB->pxStack)*4;	//转锟斤拷byte
 				}
 			}
 			#endif			

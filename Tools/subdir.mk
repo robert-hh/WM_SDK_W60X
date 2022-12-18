@@ -22,14 +22,14 @@ Src_Net_dirs := $(basename $(patsubst ./%,%,$(Src_Net_dirs)))
 Src_Net_dirs := $(filter-out $(Src_Net_exclude_dirs),$(Src_Net_dirs))
 
 
-Src_Wlan_exclude_dirs := ${TOPDIR}/Src/Wlan/ \
-                         ${TOPDIR}/Src/Wlan/Api \
-                         ${TOPDIR}/Src/Wlan/Supplicant \
-                         ${TOPDIR}/Src/Wlan/litepoint \
-                         ${TOPDIR}/Src/Wlan/Driver
-Src_Wlan_dirs := $(shell find ${TOPDIR}/Src/Wlan -maxdepth 1 -type d)
-Src_Wlan_dirs := $(basename $(patsubst ./%,%,$(Src_Wlan_dirs)))
-Src_Wlan_dirs := $(filter-out $(Src_Wlan_exclude_dirs),$(Src_Wlan_dirs))
+# Src_Wlan_exclude_dirs := ${TOPDIR}/Src/Wlan/ \
+#                          ${TOPDIR}/Src/Wlan/Api \
+#                          ${TOPDIR}/Src/Wlan/Supplicant \
+#                          ${TOPDIR}/Src/Wlan/litepoint \
+#                          ${TOPDIR}/Src/Wlan/Driver
+# Src_Wlan_dirs := $(shell find ${TOPDIR}/Src/Wlan -maxdepth 1 -type d)
+# Src_Wlan_dirs := $(basename $(patsubst ./%,%,$(Src_Wlan_dirs)))
+# Src_Wlan_dirs := $(filter-out $(Src_Wlan_exclude_dirs),$(Src_Wlan_dirs))
 
 Src_RTOS_exclude_dirs := ${TOPDIR}/Src/OS/RTOS/include \
 			 ${TOPDIR}/Src/OS/RTOS/source \

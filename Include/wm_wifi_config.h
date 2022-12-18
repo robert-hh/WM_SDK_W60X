@@ -16,10 +16,10 @@
 /*******************WIFI INFO**************************
   			Below Switch Only for Reference!!!
 ********************************************************/
-#define  TLS_CONFIG_AP        				CFG_WIFI_OFF
+#define  TLS_CONFIG_AP        				CFG_WIFI_ON
 #define  TLS_CONFIG_11N                     CFG_WIFI_ON
 
-#define  TLS_CONFIG_SOFTAP_11N              CFG_WIFI_OFF
+#define  TLS_CONFIG_SOFTAP_11N              CFG_WIFI_ON
 
 #define  TLS_CONFIG_AP_BEACON_SOFT         (CFG_ON && TLS_CONFIG_AP)
 #define  TLS_CONFIG_AP_OPT_PS              (CFG_ON && TLS_CONFIG_AP)/* SOFTAP POWER SAVE */

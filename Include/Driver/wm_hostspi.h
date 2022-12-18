@@ -254,6 +254,22 @@ int tls_spi_read(u8 * buf, u32 len);
 int tls_spi_read_with_cmd(const u8 * txbuf, u32 n_tx, u8 * rxbuf, u32 n_rx);
 
 /**
+ * @brief          This function is used to synchronous write and read data by SPI.
+ *
+ * @param[in]      txbuf        is the write data buffer.
+ * @param[in]      rxbuf        is the read data buffer.
+ * @param[in]      n_tx         is the data
+ *
+ * @retval         TLS_SPI_STATUS_OK			if write success.
+ * @retval         TLS_SPI_STATUS_EINVAL		if argument is invalid.
+ * @retval         TLS_SPI_STATUS_ENOMEM		if there is no enough memory.
+ * @retval         TLS_SPI_STATUS_ESHUTDOWN		if SPI driver does not installed.
+ *
+ * @note           None
+ */
+int tls_spi_write_readinto(const u8 * txbuf, u8 * rxbuf, u32 n_tx);
+
+/**
  * @brief          This function is used to synchronous write 32bit command then write data from SPI.
  *
  * @param[in]      cmd                   is the command data.

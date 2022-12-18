@@ -48,7 +48,7 @@ static void SpiMasterInit(u8 mode, u8 cs_active, u32 fclk)
     SPIM_CHCFG_REG = SPI_CLEAR_FIFOS;
     while (SPIM_CHCFG_REG & SPI_CLEAR_FIFOS);
 
-	tls_sys_clk_get(&sysclk);						//»ñÈ¡Êµ¼ÊÆµÂÊ
+	tls_sys_clk_get(&sysclk);						//ï¿½ï¿½È¡Êµï¿½ï¿½Æµï¿½ï¿½
 
     SPIM_CLKCFG_REG = sysclk.apbclk*UNIT_MHZ/(fclk*2) - 1;;
     SPIM_SPICFG_REG = 0;
@@ -98,7 +98,7 @@ static int SpiDmaBlockWrite(u8 * data, u32 len, u8 ifusecmd, u32 cmd)
 
     if (len % 4)
     {
-        txlen = len & 0xfffffffc;   // ²»¹»×ÖµÄ×îºóµ¥¶À·¢
+        txlen = len & 0xfffffffc;   // ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½óµ¥¶ï¿½ï¿½ï¿½
     }
     else
     {
@@ -157,7 +157,7 @@ static int SpiDmaBlockWrite(u8 * data, u32 len, u8 ifusecmd, u32 cmd)
         }
         tls_dma_free(dmaCh);
     }
-    // tx ²»¹»Ò»¸öÕû×ÖµÄ¼¸¸ö×Ö½Ú
+    // tx ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ÖµÄ¼ï¿½ï¿½ï¿½ï¿½Ö½ï¿½
     if (len > txlenbk)
     {
         u32 word32 = 0;
@@ -169,7 +169,7 @@ static int SpiDmaBlockWrite(u8 * data, u32 len, u8 ifusecmd, u32 cmd)
         SPIM_TXDATA_REG = word32;
         SPIM_MODECFG_REG = SPI_RX_TRIGGER_LEVEL(0) | SPI_TX_TRIGGER_LEVEL(0);
         SPIM_SPITIMEOUT_REG = SPI_TIMER_EN | SPI_TIME_OUT((u32) 0xffff);
-        if (ifusecmd && 0 == txcmdover) // ÐèÒª·¢ËÍÃüÁî£¬µ«ÊÇÃüÁî»¹Ã»ÓÐ·¢ËÍ³öÈ¥£¬·¢ËÍµÄ×Ö½ÚÊýÐèÒªÔö¼Ó4
+        if (ifusecmd && 0 == txcmdover) // ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½î£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½î»¹Ã»ï¿½Ð·ï¿½ï¿½Í³ï¿½È¥ï¿½ï¿½ï¿½ï¿½ï¿½Íµï¿½ï¿½Ö½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½ï¿½4
             temp = 4;
         SPIM_CHCFG_REG = SPI_FORCE_SPI_CS_OUT | SPI_TX_CHANNEL_ON | SPI_CONTINUE_MODE |
                             SPI_START | SPI_VALID_CLKS_NUM(((temp + len - txlenbk) * 8));
@@ -211,7 +211,7 @@ static int SpiDmaBlockRead(u8 * data, u32 len, u8 * txdata, u8 txlen)
 
     if (len % 4)
     {
-        rxlen = len & 0xfffffffc;   // ²»¹»×ÖµÄ×îºóµ¥¶ÀÈ¡
+        rxlen = len & 0xfffffffc;   // ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½óµ¥¶ï¿½È¡
     }
     else
     {
@@ -242,7 +242,7 @@ static int SpiDmaBlockRead(u8 * data, u32 len, u8 * txdata, u8 txlen)
     {
         if (rxlenbk > 0)
         {
-        // ËµÃ÷½ÓÊÕµÄÊý¾Ý´óÓÚ4
+        // Ëµï¿½ï¿½ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½Ý´ï¿½ï¿½ï¿½4
         // printf("\ni =%d\n",i);
             DmaDesc.dest_addr = (int) (data + i * SPI_DMA_MAX_TRANS_SIZE);
             blocksize = (rxlen > SPI_DMA_MAX_TRANS_SIZE) ? SPI_DMA_MAX_TRANS_SIZE : rxlen;
@@ -264,7 +264,7 @@ static int SpiDmaBlockRead(u8 * data, u32 len, u8 * txdata, u8 txlen)
         }
         else
         {
-            SPIM_MODECFG_REG = SPI_RX_TRIGGER_LEVEL(0) | SPI_TX_TRIGGER_LEVEL(0);   // rxÊý¾ÝÉÙÓÚ4¸öbyte£¬²»ÓÃ¿ªDMA
+            SPIM_MODECFG_REG = SPI_RX_TRIGGER_LEVEL(0) | SPI_TX_TRIGGER_LEVEL(0);   // rxï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½4ï¿½ï¿½byteï¿½ï¿½ï¿½ï¿½ï¿½Ã¿ï¿½DMA
         }
         SPIM_SPITIMEOUT_REG = SPI_TIMER_EN | SPI_TIME_OUT((u32) 0xffff);
         if (0 == blocknum)
@@ -276,7 +276,7 @@ static int SpiDmaBlockRead(u8 * data, u32 len, u8 * txdata, u8 txlen)
         }
         else
         {
-            if (0 == i)         // µÚÒ»´ÎÐèÒª´ò¿ªTX
+            if (0 == i)         // ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½TX
             {
                 SPIM_CHCFG_REG =
                     SPI_FORCE_SPI_CS_OUT | SPI_RX_CHANNEL_ON | SPI_TX_CHANNEL_ON
@@ -312,7 +312,7 @@ static int SpiDmaBlockRead(u8 * data, u32 len, u8 * txdata, u8 txlen)
     }
     tls_dma_free(dmaCh);
 
-    if (len > rxlenbk)          // È¡×îºóµÄ²»¹»Ò»¸ö×ÖµÄ¼¸¸öbyte
+    if (len > rxlenbk)          // È¡ï¿½ï¿½ï¿½Ä²ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ÖµÄ¼ï¿½ï¿½ï¿½byte
     {
         word32 = SPIM_RXDATA_REG;
         *((int *) data + rxlenbk / 4) = word32;
@@ -395,7 +395,7 @@ static u32 spi_fill_txfifo(struct tls_spi_transfer *current_transfer,
 // TLS_DBGPRT_SPI("write to spi fifo words - %d, bytes - %d.\n", rw_words,
 // rw_bytes);
 
-//ÏÂÃæ´úÂë17us
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½17us
     for (i = 0; i < rw_words; i++)
     {
         if (current_transfer->tx_buf)
@@ -479,7 +479,7 @@ static u32 spi_get_rxfifo(struct tls_spi_transfer *current_transfer,
 
 // TLS_DBGPRT_SPI("rx data: %d words, %d bytes.\n", rw_words, rw_bytes);
 
-//ÏÂÃæ´úÂë´ó¸Å10us
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½10us
     for (i = 0; i < rw_words; i++)
     {
 
@@ -901,6 +901,64 @@ int tls_spi_read_with_cmd(const u8 * txbuf, u32 n_tx, u8 * rxbuf, u32 n_rx)
 }
 
 /**
+ * @brief          This function is used to synchronous write and read data by SPI.
+ *
+ * @param[in]      txbuf        is the write data buffer.
+ * @param[in]      rxbuf        is the read data buffer.
+ * @param[in]      n_tx         is the data
+ *
+ * @retval         TLS_SPI_STATUS_OK			if write success.
+ * @retval         TLS_SPI_STATUS_EINVAL		if argument is invalid.
+ * @retval         TLS_SPI_STATUS_ENOMEM		if there is no enough memory.
+ * @retval         TLS_SPI_STATUS_ESHUTDOWN		if SPI driver does not installed.
+ *
+ * @note           None
+ */
+int tls_spi_write_readinto(const u8 * txbuf, u8 * rxbuf, u32 n_tx)
+{
+    int status;
+    struct tls_spi_message message;
+    struct tls_spi_transfer x;
+
+    if ((txbuf == NULL) || (rxbuf == NULL) || (n_tx == 0))
+    {
+        return TLS_SPI_STATUS_EINVAL;
+    }
+
+#ifdef SPI_USE_DMA
+    if (SPI_DMA_TRANSFER == spi_port->transtype)
+    {
+        if (n_tx > SPI_DMA_CMD_MAX_SIZE)
+        {
+            TLS_DBGPRT_ERR("\nread length too long\n");
+            return TLS_SPI_STATUS_EINVAL;
+        }
+        tls_os_sem_acquire(spi_port->lock, 0);
+        MEMCPY((u8 *) SPI_DMA_CMD_ADDR, txbuf, n_tx);
+        SpiDmaBlockRead((u8 *) SPI_DMA_BUF_ADDR, n_tx, (u8 *) SPI_DMA_CMD_ADDR,
+                        n_tx);
+        MEMCPY(rxbuf, (u8 *) SPI_DMA_BUF_ADDR, n_tx);
+        tls_os_sem_release(spi_port->lock);
+        return TLS_SPI_STATUS_OK;
+    }
+#endif
+
+    spi_message_init(&message);
+
+    memset(&x, 0, sizeof(x));
+    x.len = n_tx;
+    x.tx_buf = txbuf;
+    x.rx_buf = rxbuf;
+    dl_list_add_tail(&message.transfers, &x.transfer_list);
+
+/* do the i/o. */
+    status = tls_spi_sync(&message);
+
+    return status;
+}
+
+
+/**
  * @brief          This function is used to synchronous read data by SPI.
  *
  * @param[in]      buf          is the buffer for saving SPI data.
@@ -931,7 +989,7 @@ int tls_spi_read(u8 * buf, u32 len)
         u32 rdval1 = 0;
         u32 i;
         tls_os_sem_acquire(spi_port->lock, 0);
-         // Ö±½Ó´«Êä£¬ÕâÑù×öµÄÔ­ÒòÊÇDMA²»ÄÜÁ¬Ðø¶ÁÈ¡4¸ö×Ö½ÚÒÔÄÚµÄÊý¾Ý,SPI FIFO¶ÁÈ¡µ¥Î»Îªword
+         // Ö±ï¿½Ó´ï¿½ï¿½ä£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô­ï¿½ï¿½ï¿½ï¿½DMAï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡4ï¿½ï¿½ï¿½Ö½ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½,SPI FIFOï¿½ï¿½È¡ï¿½ï¿½Î»Îªword
         if (len <= 4)
         {
             SPIM_CHCFG_REG = SPI_CLEAR_FIFOS;
@@ -955,7 +1013,7 @@ int tls_spi_read(u8 * buf, u32 len)
             SPIM_CHCFG_REG = 0x00000000;
             SPIM_MODECFG_REG = 0x00000000;
         }
-        else                    // DMA´«Êä
+        else                    // DMAï¿½ï¿½ï¿½ï¿½
         {
             if (len > SPI_DMA_BUF_MAX_SIZE)
             {
@@ -1013,7 +1071,7 @@ int tls_spi_write(const u8 * buf, u32 len)
         u32 rdval1 = 0;
         u32 i;
         tls_os_sem_acquire(spi_port->lock, 0);
-        if (len <= 4)           // Ö±½Ó´«Êä£¬ÕâÑù×öµÄÔ­ÒòÊÇDMA²»ÄÜÁ¬Ðø´«ÊäÉÙÓÚ4¸ö×Ö½ÚµÄÊý¾Ý£¬SPI
+        if (len <= 4)           // Ö±ï¿½Ó´ï¿½ï¿½ä£¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô­ï¿½ï¿½ï¿½ï¿½DMAï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½4ï¿½ï¿½ï¿½Ö½Úµï¿½ï¿½ï¿½ï¿½Ý£ï¿½SPI
         {
             SPIM_CHCFG_REG = SPI_CLEAR_FIFOS;
             while (SPIM_CHCFG_REG & SPI_CLEAR_FIFOS);
@@ -1034,7 +1092,7 @@ int tls_spi_write(const u8 * buf, u32 len)
             SPIM_CHCFG_REG = 0x00000000;
             SPIM_MODECFG_REG = 0x00000000;
         }
-        else                    // DMA´«Êä
+        else                    // DMAï¿½ï¿½ï¿½ï¿½
         {
             if (len > SPI_DMA_BUF_MAX_SIZE)
             {
@@ -1288,7 +1346,7 @@ int tls_spi_init(void)
         return TLS_SPI_STATUS_ENOMEM;
     }
 
-    port->speed_hz = SPI_DEFAULT_SPEED; /* Ä¬ÈÏ2M */
+    port->speed_hz = SPI_DEFAULT_SPEED; /* Ä¬ï¿½ï¿½2M */
     port->cs_active = SPI_CS_ACTIVE_MODE;
     port->mode = SPI_DEFAULT_MODE;  /* CPHA = 0,CPOL = 0 */
     port->reconfig = 0;
@@ -1308,8 +1366,8 @@ int tls_spi_init(void)
     spi_set_endian(1);
     tls_spi_trans_type(SPI_BYTE_TRANSFER);
     spi_set_mode(spi_port->mode);
-    spi_set_chipselect_mode(SPI_CS_INACTIVE_MODE);  /* cs=1 ,Æ¬Ñ¡ÎÞÐ§ */
-    spi_force_cs_out(1);        /* Æ¬Ñ¡ÓÉÈí¼þ¿ØÖÆ */
+    spi_set_chipselect_mode(SPI_CS_INACTIVE_MODE);  /* cs=1 ,Æ¬Ñ¡ï¿½ï¿½Ð§ */
+    spi_force_cs_out(1);        /* Æ¬Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
     spi_set_sclk(spi_port->speed_hz);
 
     spi_set_tx_trigger_level(0);
@@ -1354,7 +1412,7 @@ int tls_spi_exit(void)
 void tls_spi_slave_sel(u16 slave)
 {
 // u16 ret;
-/*gpio0¿ØÖÆcsÐÅºÅ*/
+/*gpio0ï¿½ï¿½ï¿½ï¿½csï¿½Åºï¿½*/
     tls_gpio_cfg((enum tls_io_name) SPI_SLAVE_CONTROL_PIN, WM_GPIO_DIR_OUTPUT,
                  WM_GPIO_ATTR_FLOATING);
     if (SPI_SLAVE_FLASH == slave)
