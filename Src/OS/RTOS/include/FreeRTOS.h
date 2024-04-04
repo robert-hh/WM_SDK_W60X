@@ -1,6 +1,6 @@
 /*
     FreeRTOS V7.0.2 - Copyright (C) 2011 Real Time Engineers Ltd.
-	
+
 
     ***************************************************************************
      *                                                                       *
@@ -109,11 +109,11 @@ extern void vClearInterruptMaskFromISR( int ulMask );
 	#error Missing definition:  INCLUDE_uxTaskPriorityGet should be defined in FreeRTOSConfig.h as either 1 or 0.  See the Configuration section of the FreeRTOS API documentation for details.
 #endif
 
-#ifndef INCLUDE_vTaskDelete		
+#ifndef INCLUDE_vTaskDelete
 	#error Missing definition:  INCLUDE_vTaskDelete		 should be defined in FreeRTOSConfig.h as either 1 or 0.  See the Configuration section of the FreeRTOS API documentation for details.
 #endif
 
-#ifndef INCLUDE_vTaskSuspend	
+#ifndef INCLUDE_vTaskSuspend
 	#error Missing definition:  INCLUDE_vTaskSuspend	 should be defined in FreeRTOSConfig.h as either 1 or 0.  See the Configuration section of the FreeRTOS API documentation for details.
 #endif
 
@@ -134,7 +134,7 @@ extern void vClearInterruptMaskFromISR( int ulMask );
 #endif
 
 #ifndef INCLUDE_xTimerGetTimerDaemonTaskHandle
-	#define INCLUDE_xTimerGetTimerDaemonTaskHandle 0
+	#define INCLUDE_xTimerGetTimerDaemonTaskHandle 1
 #endif
 
 #ifndef INCLUDE_pcTaskGetTaskName
@@ -202,7 +202,7 @@ extern void vClearInterruptMaskFromISR( int ulMask );
 
 	#ifndef configTIMER_TASK_PRIORITY
 		#define configTIMER_TASK_PRIORITY	1
-	//	#error If configUSE_TIMERS is set to 1 then configTIMER_TASK_PRIORITY must also be defined.		
+	//	#error If configUSE_TIMERS is set to 1 then configTIMER_TASK_PRIORITY must also be defined.
 	#endif /* configTIMER_TASK_PRIORITY */
 
 	#ifndef configTIMER_QUEUE_LENGTH
@@ -295,7 +295,7 @@ extern void vClearInterruptMaskFromISR( int ulMask );
 
 /* The following event macros are embedded in the kernel API calls. */
 
-#ifndef traceQUEUE_CREATE	
+#ifndef traceQUEUE_CREATE
 	#define traceQUEUE_CREATE( pxNewQueue )
 #endif
 

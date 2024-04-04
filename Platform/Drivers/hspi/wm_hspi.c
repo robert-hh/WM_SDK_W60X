@@ -299,7 +299,7 @@ void tls_set_high_speed_interface_type(int type)
 
     if (HSPI_INTERFACE_SPI == type)
     {
-#if 0		
+#if 0
 #if (HSPI_IO_REUSE_NUM == 0)
 		tls_io_cfg_set(WM_IO_PB_14, WM_IO_OPTION1);
 		tls_io_cfg_set(WM_IO_PB_15, WM_IO_OPTION1);
@@ -328,11 +328,11 @@ void tls_set_high_speed_interface_type(int type)
     }
     else if (HSPI_INTERFACE_SDIO == type)
     {
-#if 0		
+#if 0
 		if(WM_IO_OPTION1 == tls_io_cfg_get(WM_IO_PB_16))	//HSPI_CK,as sdio need close
 			tls_io_cfg_set(WM_IO_PB_16, WM_IO_OPTION5);
 		if(WM_IO_OPTION2 == tls_io_cfg_get(WM_IO_PB_08))	//HSPI_CK,as sdio need close
-			tls_io_cfg_set(WM_IO_PB_08, WM_IO_OPTION5);		
+			tls_io_cfg_set(WM_IO_PB_08, WM_IO_OPTION5);
 		tls_io_cfg_set(WM_IO_PB_08, WM_IO_OPTION3);
 		tls_io_cfg_set(WM_IO_PB_09, WM_IO_OPTION3);
 		tls_io_cfg_set(WM_IO_PB_10, WM_IO_OPTION3);

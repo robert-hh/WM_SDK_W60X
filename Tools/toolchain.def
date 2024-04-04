@@ -32,7 +32,6 @@ endif
 # Define Toolchains
 #---------------------------------------------------------------------------
 ifeq ($(TOOL_GNU),1)
-  ifeq ($(WM_VERBOSE),s)
     CC          = $(CROSS)gcc
     ASM         = $(CROSS)gcc
     AR          = $(CROSS)ar
@@ -43,18 +42,6 @@ ifeq ($(TOOL_GNU),1)
     RM          = rm
     CP          = cp
     MAKE        = make
-  else ifeq ($(WM_VERBOSE),)
-    CC          = @echo "    CC  $<";$(CROSS)gcc
-    ASM         = @echo "    ASM $<";$(CROSS)gcc
-    AR          = @echo "    AR  $<";$(CROSS)ar
-    LD          = @echo "    LD  $<";$(CROSS)ld
-    ELF         = @echo "    OBJCP $<";$(CROSS)objcopy
-    STRIP       = $(CROSS)strip
-    ECHO        = echo
-    RM          = rm
-    CP          = cp
-    MAKE        = make
-  endif
 else
   CC          = $(CROSS)armcc
   ASM         = $(CROSS)armasm
@@ -68,7 +55,11 @@ endif
 # Complier options
 #---------------------------------------------------------------------------
 
-CXX_optimization = -O1
+ifeq ($(DEBUG), 1)
+CXX_optimization = -Og -g
+else
+CXX_optimization = -Os
+endif
 
 ifeq ($(TOOL_GNU),1)
   CFLAGS := -Wall \
