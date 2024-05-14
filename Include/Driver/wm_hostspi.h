@@ -25,9 +25,9 @@
 #define SPI_DMA_CMD_MAX_SIZE       (0x20)
 
 #define SPI_DMA_BUF_ADDR		((u32)(SPI_DMA_CMD_ADDR + SPI_DMA_CMD_MAX_SIZE))
-#define SPI_DMA_BUF_MAX_SIZE	8160
+#define SPI_DMA_BUF_MAX_SIZE	(1024 - 32)
 
-#define SPI_DMA_MAX_TRANS_SIZE	4092
+#define SPI_DMA_MAX_TRANS_SIZE	512
 
 /**
  *  error code.

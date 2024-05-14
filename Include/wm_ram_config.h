@@ -16,11 +16,11 @@
 
 /*0x20000000~MASTER_SPI_DMA_ADDR for stack,heap & data*/
 
-/*Master SPI use buffer when spi use dma transfer mode*/
-#define MASTER_SPI_DMA_ADDR        0x20038000UL
-
 /*High speed SPI or SDIO buffer to exchange data*/
-#define SLAVE_HSPI_SDIO_ADDR        0x2003A000UL
+#define SLAVE_HSPI_SDIO_ADDR        0x20039C00UL
+
+/*Master SPI use buffer when spi use dma transfer mode*/
+#define MASTER_SPI_DMA_ADDR        0x2003BC00UL
 
 /*Wi-Fi use buffer to exchange data*/
 #define WIFI_MEM_START_ADDR		0x2003C000UL
